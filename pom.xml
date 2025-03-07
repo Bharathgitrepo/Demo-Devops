@@ -13,7 +13,7 @@
     <groupId>com.example</groupId>
     <artifactId>twitter-app</artifactId>
     <version>0.0.3</version>  <!-- Initial version, updated dynamically -->
-    <name>web-app</name>
+    <name>twitter-app</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
