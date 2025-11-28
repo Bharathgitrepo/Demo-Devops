@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:   # allows manual run
+  pull_request:
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -15,14 +16,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Authenticate to AWS using OIDC
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::288316011796:role/DevOps-ROLE-Demo-devops-repo
           aws-region: ap-south-1
 
-      - name: Test AWS authentication
-        run: aws sts get-caller-identity
+      # Install Terraform
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # Terraform Format Check
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      # Terraform Validate
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # Terraform Apply (only for main branch push)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve -input=false
