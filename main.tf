@@ -3,10 +3,10 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "demo_bucket" {
-  bucket = "bharath-demo-s3-bucket-example"   # must be globally unique
+  bucket = "bharath-demo-bucket-unique-12345"
 }
 
-resource "aws_s3_bucket_versioning" "versioning" {
+resource "aws_s3_bucket_versioning" "demo_versioning" {
   bucket = aws_s3_bucket.demo_bucket.id
 
   versioning_configuration {
