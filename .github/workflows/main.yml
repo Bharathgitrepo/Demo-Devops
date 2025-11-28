@@ -1,8 +1,14 @@
 name: Deploy
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:   # allows manual run
+
 permissions:
-  id-token: write       # Required for OIDC token
-  contents: read        # Required to checkout the repo
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
@@ -15,7 +21,7 @@ jobs:
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::288316011796:role/DevOps-ROLE-Demo-devops-repo
+          role-to-assume: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
           aws-region: ap-south-1
 
       - name: Test AWS authentication
