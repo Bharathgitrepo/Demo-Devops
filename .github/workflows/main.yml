@@ -1,21 +1,22 @@
 name: Deploy
 
 permissions:
-  id-token: write
-  contents: read
+  id-token: write       # Required for OIDC token
+  contents: read        # Required to checkout the repo
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials using OIDC
+      - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
+          role-to-assume: arn:aws:iam::288316011796:role/DevOps-ROLE-Demo-devops-repo
           aws-region: ap-south-1
 
-      - name: Test AWS access
+      - name: Test AWS authentication
         run: aws sts get-caller-identity
