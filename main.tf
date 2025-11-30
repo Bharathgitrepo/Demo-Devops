@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "demo_bucket" {
-  bucket = "bharath-demo-bucket-unique-12345"
+  bucket = "bharath-demo-bucket-unique-anil"
 }
 
 resource "aws_s3_bucket_versioning" "demo_versioning" {
