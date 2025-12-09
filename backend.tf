@@ -8,7 +8,7 @@ terraform {
     key    = "dev/terraform.tfstate"
     region = "ap-south-1"
 
-    encrypt      = true
+    encrypt = true
 
     # ✅ New native S3 locking mechanism
     use_lockfile = true
