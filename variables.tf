@@ -19,7 +19,7 @@ variable "vpc_cidr" {
 variable "public_subnets" {
   description = "Public subnet CIDRs (one per AZ)"
   type        = list(string)
-  default     = [
+  default = [
     "10.0.1.0/24",
     "10.0.2.0/24",
     "10.0.3.0/24",
@@ -29,7 +29,7 @@ variable "public_subnets" {
 variable "private_subnets" {
   description = "Private subnet CIDRs (one per AZ)"
   type        = list(string)
-  default     = [
+  default = [
     "10.0.11.0/24",
     "10.0.12.0/24",
     "10.0.13.0/24",
@@ -39,7 +39,7 @@ variable "private_subnets" {
 variable "azs" {
   description = "Availability Zones to use"
   type        = list(string)
-  default     = [
+  default = [
     "ap-south-1a",
     "ap-south-1b",
     "ap-south-1c",
