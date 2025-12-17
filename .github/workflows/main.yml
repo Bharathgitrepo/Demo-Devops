@@ -6,9 +6,15 @@ on:
   #     - main
   # pull_request:
   workflow_dispatch:
+    inputs:
+      destroy:
+        description: "Set to true to destroy infrastructure"
+        required: true
+        default: "false"
+        type: boolean
 
 permissions:
-  id-token: write
+  id-token: writea
   contents: read
 
 jobs:
@@ -51,3 +57,8 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve -input=false
+
+      # Destroy runs ONLY when destroy=true
+      - name: Terraform Destroy
+        if: inputs.destroy == true
+        run: terraform destroy -auto-approve -input=false        
